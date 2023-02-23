@@ -10,6 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "get-sync": "^1.1.2",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "sync-request": "^6.1.0",
+    "xhr2": "^0.2.1"
   }
 }
