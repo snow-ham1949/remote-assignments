@@ -15,10 +15,8 @@ function requestPromise(url) {
     req.open('GET', url);
     req.onload = function() {
       if (req.status == 200) {
-        // 使用 resolve 回傳成功的結果，也可以在此直接轉換成 JSON 格式
         resolve(JSON.parse(req.response));
       } else {
-        // 使用 reject 自訂失敗的結果
         reject(new Error(req))
       }
     };
@@ -29,6 +27,6 @@ async function requestAsyncAwait(url) {
   let res = await requestPromise(url);
   return res;
 }
-// requestCallback(url, console.log); // would print out the execution time
-// requestPromise(url).then(console.log);
+requestCallback(url, console.log); // would print out the execution time
+requestPromise(url).then(console.log);
 requestAsyncAwait(url);
