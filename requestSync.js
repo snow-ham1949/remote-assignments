@@ -1,11 +1,10 @@
 // requestSync.js
-const url = "https://api.appworks-schoolcampus3.online/api/v1/clock/delay";
-const XMLHttpRequest = require('xhr2');
+const url = "https://api.appworks-school-campus3.online/api/v1/clock/delay";
+var request = require('sync-request');
 
 function requestSync(url) {
-  var httpRequest = new XMLHttpRequest(); 
-  httpRequest.open("GET", url, true); 
-  httpRequest.send(); 
+  var res = request('GET', url);
+  console.log(res.getBody());
 }
 requestSync(url) // would print out the execution time
 requestSync(url)
