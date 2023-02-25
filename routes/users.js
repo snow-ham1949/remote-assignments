@@ -1,5 +1,6 @@
 const express = require('express');
 const validator = require('./validate');
+const {validateName, validateEmail, validatePassword} = validator;
 
 const router = express.Router();
 
