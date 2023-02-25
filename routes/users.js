@@ -1,6 +1,6 @@
 const express = require('express');
-const validator = require('../validate');
-const db = require('../database');
+const validator = require('../helper/validate');
+const db = require('../helper/database');
 
 const {validateDateFormat, checkInputFormat} = validator;
 
