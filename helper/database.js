@@ -23,7 +23,7 @@ connection.connect((err) => {
  */
 function connectionCheck(connection) {
   if (connection.state === 'disconnected') {
-    console.error("Database connection is not established.");
+    console.error("Database connection isn't established.");
     return false;
   }
   return true;
@@ -31,7 +31,7 @@ function connectionCheck(connection) {
 
 /**
  * - change database to 'database'
- * - Async function
+ * - async function
  * @param {string} database 
  */
 const useDatabase = async function (database) {
@@ -81,7 +81,7 @@ const registerUser = async function (name, email, password) {
 
 /**
  * - get user data
- * - Async function
+ * - async function
  * @param {string} id 
  * @return {object} user object
  */
