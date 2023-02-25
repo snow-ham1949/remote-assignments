@@ -19,7 +19,7 @@ connection.connect((err) => {
 /**
  * - check whether connection is successfully established
  * @param {connection} connection 
- * @returns 
+ * @returns {boolean}
  */
 function connectionCheck(connection) {
   if (connection.state === 'disconnected') {
@@ -47,7 +47,7 @@ const useDatabase = async function (database) {
 /** 
  * - check whether email exists in the database
  * @param {string} email 
- * @return {boolean} isEmailExist
+ * @return {boolean} 
  */
 const checkUserEmail = async function (email) {
   if (!connectionCheck(connection)) return;
