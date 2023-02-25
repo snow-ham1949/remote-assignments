@@ -1,10 +1,14 @@
 const express = require('express');
-const validator = require('./validate');
-const {validateName, validateEmail, validatePassword} = validator;
+const validator = require('../validate');
+const db = require('../database.js');
+
+const {validateDateFormat, checkInputFormat} = validator;
 
 const router = express.Router();
 
 router.use(express.json());
+
+db.useDatabase('assignment');
 
 // user sign up api
 router.post('/', (req, res) => { 
@@ -16,7 +20,7 @@ router.post('/', (req, res) => {
   }
 
   const requestDate = req.get('request-date');
-  if (!checkRequestDate(requestDate)) {
+  if (!validateDateFormat(requestDate)) {
     res.status(400).json({
       "error": "Invalid request date"
     });
@@ -25,13 +29,13 @@ router.post('/', (req, res) => {
 
   const {name, email, password} = req.body;
   if (checkInputFormat(name, email, password)) {
-    if (checkEmailExist(email)) {
+    if (db.checkUserEmail(email)) {
       res.status(400).json({
         "error": "Email already exists"
       });
     }
     else {
-      const id = registerUser(name, email, password);
+      const id = db.registerUser(name, email, password);
       res.status(200).json({
         "data": {
           "user": {id: id, name, email},
@@ -57,7 +61,7 @@ router.get('/', (req, res) => {
   }
 
   const requestDate = req.get('request-date');
-  if (!checkRequestDate(requestDate)) {
+  if (!validateDateFormat(requestDate)) {
     res.status(400).json({
       "error": "Invalid request date"
     });
@@ -65,7 +69,7 @@ router.get('/', (req, res) => {
   }
 
   const userid = req.get('id');
-  const user = getUserInformation(userid);
+  const user = db.getUserData(userid);
   if (user) {
     res.status(200).json({
       "data": {
@@ -80,44 +84,5 @@ router.get('/', (req, res) => {
     });    
   }
 });
-
-// TODO: check whether request date meet the format requirement
-function checkRequestDate(date) {
-
-}
-
-function checkInputFormat(name, email, password) {
-  if(validateName(name) && validateEmail(email) && validatePassword(password)) return true;
-  else return false;
-}
-
-/**
- * TODO: check whether email has already been registered
- * @param {string} email 
- * @returns {boolean} 
- */
-function checkEmailExist(email) {
-
-}
-
-/**
- * TODO: register user into database
- * @param {string} name 
- * @param {string} email 
- * @param {string} password 
- * @return {string} id
- */
-function registerUser(name, email, password) {
-
-}
-
-/**
- * TODO: check user information in database, if not existing, return empty json
- * @param {string} userid
- * @returns {json} 
- */
-function getUserInformation(userid) {
-
-}
 
 module.exports = router;
