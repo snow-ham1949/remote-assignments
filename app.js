@@ -1,8 +1,9 @@
 const express = require('express');
+const mysql = require('mysql2');
+const validator = require('./validate');
+
 const app = express();
 
 app.listen(3000);
 
-app.get('/healthcheck', (req, res) => { 
-  res.status(200).send('OK');
-});
+app.use('/healthcheck', require('./routes/healthcheck'));
