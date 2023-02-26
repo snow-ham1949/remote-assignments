@@ -3,21 +3,24 @@ const XMLHttpRequest = require('xhr2');
 const request = require('request');
 
 function requestCallback(url, callback) {
+  const startTime = Date.now();
   request(url, (err, res, body) => {
-    callback('error: ', err);
-    callback('stausCode: ', res.statusCode);
-    callback('body: ', body);
+    callback(`error: ${err}`);
+    callback(`stausCode: ${res.statusCode}`);
+    callback(`execution time: ${JSON.parse(body).data.now / 1000000 - startTime}`);
   })
 }
 function requestPromise(url) {
+  const startTime = Date.now();
   return new Promise((resolve, reject)=> {
     const req = new XMLHttpRequest();
     req.open('GET', url);
     req.onload = function() {
       if (req.status == 200) {
-        resolve(JSON.parse(req.response));
+        const executionTime = JSON.parse(req.response).data.now / 1000000 - startTime;
+        resolve(executionTime);
       } else {
-        reject(new Error(req))
+        reject(new Error(req));
       }
     };
     req.send();
