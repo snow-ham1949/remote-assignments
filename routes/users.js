@@ -9,8 +9,7 @@ const router = express.Router();
 router.use(express.json());
 
 // user sign up api
-router.post('/', async (req, res) => {
-  console.log(req.body);
+router.post('/', async (req, res) => { 
   if (req.headers['content-type'] !== 'application/json') {
     res.status(400).send('Wrong content-type');
     return;
@@ -41,7 +40,6 @@ router.post('/', async (req, res) => {
       }
     }
   }
-
 });
 
 // user query api
