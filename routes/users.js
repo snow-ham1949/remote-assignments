@@ -10,7 +10,7 @@ router.use(express.json());
 
 // user sign up api
 router.post('/', async (req, res) => { 
-  if (req.header['content-type'] !== 'applicaton/json') {
+  if (req.headers['content-type'] !== 'applicaton/json') {
     res.status(400).send('Wrong content-type');
     return;
   }
@@ -42,12 +42,11 @@ router.post('/', async (req, res) => {
       });
     }
   }
-
 });
 
 // user query api
 router.get('/', async (req, res) => {
-  if (req.header['content-type'] !== 'applicaton/json') {
+  if (req.headers['content-type'] !== 'applicaton/json') {
     res.status(400).send('Wrong content-type');
     return;
   }
@@ -70,7 +69,6 @@ router.get('/', async (req, res) => {
   else {
     res.status(403).send('User does not exist');
   }
-
 });
 
 module.exports = router;
