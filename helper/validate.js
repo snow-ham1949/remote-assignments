@@ -15,7 +15,7 @@ const checkPassword = (password) => {
   let numUppercase = (password.match(/[A-Z]/g) || []).length;
   let numLowercase = (password.match(/[a-z]/g) || []).length;
   let numDigit = (password.match(/[0-9]/g) || []).length;
-  let numSpecial = (password.match(/[~`!@#$%^&*()_-+={[}\]|:;"'<,>.?/]/g) || []).length;
+  let numSpecial = (password.match(/[~`!@#$%^&*()_+={[}\]|:;"'<,>.?/]/g) || []).length;
 
   let type = 0;
   if (numUppercase > 0) type++;
@@ -28,9 +28,9 @@ const checkPassword = (password) => {
 };
 
 const checkRequestDate = (date) => {
-  const dateFormat_RFC1123 = /^((Mon|Tue|Wed|Thu|Fri|Sat|Sun), [0-9]{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT)$/;
-  const dateFormat_RFC1036 = /^((Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day, [0-9]{2}-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT)$/;
-  const dateFormat_ANSIC = /^((Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) *[0-9]{1,2} [0-9]{1,2}:[0-9]{2}:[0-9]{2} [0-9]{4})$/;
+  const dateFormat_RFC1123 = /^Date: (Mon|Tue|Wed|Thu|Fri|Sat|Sun), [0-9]{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) [0-9]{4} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT$/;
+  const dateFormat_RFC1036 = /^Date: (Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day, [0-9]{2}-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} GMT$/;
+  const dateFormat_ANSIC = /^Date: (Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) *[0-9]{1,2} [0-9]{1,2}:[0-9]{2}:[0-9]{2} [0-9]{4}$/;
   return dateFormat_RFC1123.test(date) || dateFormat_RFC1036.test(date) || dateFormat_ANSIC.test(date);
 };
 

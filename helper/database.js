@@ -5,7 +5,7 @@ const connection = mysql.createConnection({
   host: 'database-instance.c1a2hycmc2k6.ap-northeast-1.rds.amazonaws.com',
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
-  datebase: 'assignment'
+  database: 'assignment'
 });
 
 connection.connect((err) => {
@@ -16,7 +16,17 @@ connection.connect((err) => {
   console.log('DB connected');
 });
 
-const checkEmailExistence = async function(email) {
+function connectionCheck(connection) {
+  if (connection.state === 'disconnected') {
+    console.error(`Database connection isn't established.`);
+    return false;
+  }
+
+  return true;
+}
+
+const checkEmailExistence = async function (email) {
+  if (!connectionCheck(connection)) return;
   try {
     const emailExist = await checkEmailExistenceQuery(email);
     return emailExist;
@@ -27,16 +37,19 @@ const checkEmailExistence = async function(email) {
 }
 
 const registerUser = async function (name, email, password) {
+  if (!connectionCheck(connection)) return false;
   try {
-    const id = await registerUserQuery(name, email, password);
-    return id;
+    const user = await registerUserQuery(name, email, password);
+    return user.insertId;
   }
   catch (err) {
     console.error(err);
+    return -1;
   }
 };
 
 const checkUserExistence = async function (userid) {
+  if (!connectionCheck(connection)) return {};
   try {
     const user = await checkUserExistenceQuery(userid);
     return user;
@@ -56,6 +69,7 @@ function checkEmailExistenceQuery(email) {
         reject(err);
       }
       else {
+        // console.log(result.length > 0);
         if (result.length > 0) {
           resolve(true);
         }
@@ -75,6 +89,7 @@ function registerUserQuery(name, email, password) {
         reject(err);
       }
       else {
+        console.log(result);
         resolve(result);
       }
     })
