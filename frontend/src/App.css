@@ -72,3 +72,8 @@
   outline: 0;
   background-color: #fc364c;
 }
+
+.success-message {
+  color: var(--secondary-color);
+  margin: 5px;
+}
