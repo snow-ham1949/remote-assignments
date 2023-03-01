@@ -10,6 +10,8 @@ router.use(express.json());
 
 // user sign up api
 router.post('/', async (req, res) => { 
+  console.log(req.headers);
+  console.log(req.body);
   if (req.headers['content-type'] !== 'application/json') {
     res.status(400).send('Wrong content-type');
     return;
