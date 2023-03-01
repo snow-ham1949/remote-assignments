@@ -89,7 +89,7 @@ function registerUserQuery(name, email, password) {
         reject(err);
       }
       else {
-        console.log(result);
+        // console.log(result);
         resolve(result);
       }
     })
