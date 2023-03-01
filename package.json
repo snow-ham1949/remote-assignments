@@ -2,8 +2,12 @@
   "name": "remote-assignments",
   "version": "1.0.0",
   "description": "## Description",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -15,5 +19,8 @@
     "mysql2": "^3.1.2",
     "pm2": "^5.2.2",
     "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
