@@ -7,7 +7,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userID, setUserID] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(' ');
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -21,15 +21,10 @@ const App = () => {
       data: { name, email, password }
     })
     .then((res) => { 
-      if (res.data.hasOwnProperty('error')) {
-        setErrorMessage(res.data.error)
-      }
-      else {
-        setUserID(res.data.data.user.id)
-      }
+      setUserID(res.data.data.user.id)
     })
     .catch(function (error) {
-      console.log("error!" + error.toJSON());
+      setErrorMessage(error.message);
     });
   };
 

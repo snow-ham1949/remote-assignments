@@ -72,6 +72,7 @@ function checkEmailExistenceQuery(email) {
         // console.log(result.length > 0);
         if (result.length > 0) {
           resolve(true);
+          return;
         }
         else {
           resolve(false);

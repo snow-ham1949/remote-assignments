@@ -32,14 +32,19 @@ router.post('/', async (req, res) => {
     });
   }
   else {
-    if (db.checkEmailExistence(email) === true) {
+    const emailExist = await db.checkEmailExistence(email);
+    if (emailExist) {
       res.status(403).json({
         "error": "Email already exists"
       });
     }
     else {
       const id = await db.registerUser(name, email, password);
-      if (id < 0) res.send('Oops! Something went wrong');
+      if (id < 0) {
+        res.status(200).json({
+          "error": "Oops! Something went wrong"
+        });
+      }
       else {
         res.status(200).json({
           "data": {
@@ -79,7 +84,9 @@ router.get('/', async (req, res) => {
     })
   }
   else {
-    res.status(403).send('User does not exist');
+    res.status(403).json({
+      "error": "User does not exist"
+    });
   }
 });
 
