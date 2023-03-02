@@ -44,14 +44,6 @@
   border-color: var(--tertiary-color);
 }
 
-.form-control.success input {
-  border-color: var(--success-color);
-}
-
-.form-control.error input {
-  border-color: var(--error-color);
-}
-
 .form button {
   cursor: pointer;
   background: var(--secondary-color);
@@ -74,6 +66,11 @@
 }
 
 .success-message {
-  color: var(--secondary-color);
+  color: var(--success-color);
+  margin: 5px;
+}
+
+.error-message {
+  color: var(--error-color);
   margin: 5px;
 }

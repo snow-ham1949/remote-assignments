@@ -13,21 +13,29 @@ router.post('/', async (req, res) => {
   console.log(req.headers);
   console.log(req.body);
   if (req.headers['content-type'] !== 'application/json') {
-    res.status(400).send('Wrong content-type');
+    res.status(400).json({
+      "error": "Wrong content-type"
+    });
     return;
   }
   const requestDate = req.headers['request-date'];
   if (!checkRequestDate(requestDate)) {
-    res.status(400).send('Wrong request date format');
+    res.status(400).json({
+      "error": "Wrong request date format"
+    });
     return;
   }
   const { name, email, password } = req.body;
   if (validateInput(name, email, password) === false) {
-    res.status(400).send('Wrong name/email/password format');
+    res.status(400).json({
+      "error": "Wrong name/email/password format"
+    });
   }
   else {
     if (db.checkEmailExistence(email) === true) {
-      res.status(403).send('Email already exists');
+      res.status(403).json({
+        "error": "Email already exists"
+      });
     }
     else {
       const id = await db.registerUser(name, email, password);
