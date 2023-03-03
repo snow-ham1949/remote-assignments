@@ -11,35 +11,21 @@ const App = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const res = await axios({
-        method: 'post',
-        url: 'http://175.41.198.71/api/users',
-        headers: {
-          'content-type': 'application/json',
-          'request-date': new Date().toUTCString()
-        },
-        data: { name, email, password }        
-      })
-      setUserID(res.data.data.user.id);
-    } catch (err) {
-      setErrorMessage(err.message);
-    }
-    // axios({
-    //   method: 'post',
-    //   url: 'http://175.41.198.71/api/users',
-    //   headers: {
-    //     'content-type': 'application/json',
-    //     'request-date': new Date().toUTCString()
-    //   },
-    //   data: { name, email, password }
-    // })
-    // .then((res) => { 
-    //   setUserID(res.data.data.user.id)
-    // })
-    // .catch(function (error) {
-    //   setErrorMessage(error.message);
-    // });
+    axios({
+      method: 'post',
+      url: 'http://175.41.198.71/api/users',
+      headers: {
+        'content-type': 'application/json',
+        'request-date': new Date().toUTCString()
+      },
+      data: { name, email, password }
+    })
+    .then((res) => { 
+      setUserID(res.data.data.user.id)
+    })
+    .catch(function (error) {
+      setErrorMessage(error.message);
+    });
   };
 
   return (
