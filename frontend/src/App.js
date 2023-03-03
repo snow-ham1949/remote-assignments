@@ -9,23 +9,37 @@ const App = () => {
   const [userID, setUserID] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios({
-      method: 'post',
-      url: 'http://175.41.198.71/api/users',
-      headers: {
-        'content-type': 'application/json',
-        'request-date': new Date().toUTCString()
-      },
-      data: { name, email, password }
-    })
-    .then((res) => { 
-      setUserID(res.data.data.user.id)
-    })
-    .catch(function (error) {
-      setErrorMessage(error.message);
-    });
+    try {
+      const res = await axios({
+        method: 'post',
+        url: 'http://175.41.198.71/api/users',
+        headers: {
+          'content-type': 'application/json',
+          'request-date': new Date().toUTCString()
+        },
+        data: { name, email, password }        
+      })
+      setUserID(res.data.data.user.id);
+    } catch (err) {
+      setErrorMessage(err.message);
+    }
+    // axios({
+    //   method: 'post',
+    //   url: 'http://175.41.198.71/api/users',
+    //   headers: {
+    //     'content-type': 'application/json',
+    //     'request-date': new Date().toUTCString()
+    //   },
+    //   data: { name, email, password }
+    // })
+    // .then((res) => { 
+    //   setUserID(res.data.data.user.id)
+    // })
+    // .catch(function (error) {
+    //   setErrorMessage(error.message);
+    // });
   };
 
   return (
