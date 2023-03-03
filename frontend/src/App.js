@@ -13,7 +13,7 @@ const App = () => {
     event.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:4000/users',
+      url: 'http://127.0.0.1/api/users',
       headers: {
         'content-type': 'application/json',
         'request-date': new Date().toUTCString()
@@ -27,10 +27,6 @@ const App = () => {
       setErrorMessage(error.message);
     });
   };
-
-  // const LogInMessage = () => {
-  
-  // }
 
   return (
     <div className="container">
