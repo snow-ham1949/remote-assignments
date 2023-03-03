@@ -13,7 +13,7 @@ const App = () => {
     event.preventDefault();
     axios({
       method: 'post',
-      url: 'http://127.0.0.1/api/users',
+      url: 'http://175.41.198.71/api/users',
       headers: {
         'content-type': 'application/json',
         'request-date': new Date().toUTCString()
