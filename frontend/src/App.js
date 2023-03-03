@@ -24,7 +24,7 @@ const App = () => {
       setUserID(res.data.data.user.id)
     })
     .catch(function (error) {
-      setErrorMessage(error.message);
+      setErrorMessage(error.response.data.error);
     });
   };
 
