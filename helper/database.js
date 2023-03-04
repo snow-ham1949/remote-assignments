@@ -72,6 +72,7 @@ function checkEmailExistenceQuery(email) {
         // console.log(result.length > 0);
         if (result.length > 0) {
           resolve(true);
+          return;
         }
         else {
           resolve(false);
@@ -89,7 +90,7 @@ function registerUserQuery(name, email, password) {
         reject(err);
       }
       else {
-        console.log(result);
+        // console.log(result);
         resolve(result);
       }
     })
